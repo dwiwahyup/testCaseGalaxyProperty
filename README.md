@@ -79,6 +79,7 @@ Note: Semua akun passwordnya sama yaitu "1234"
     * Sistem akan otomatis menghitung PPH21 dan total gaji bersih
 - Simpan pengajuan pembayaran
 - Ajukan ke manager
+- Jika sudah di approve manager bisa melakukan pembayaran dengan mengupload bukti transfer
 
 ### 2. Manager
 
