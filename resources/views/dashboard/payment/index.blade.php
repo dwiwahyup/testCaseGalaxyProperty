@@ -103,6 +103,11 @@
                                 </tr>
                             </tfoot>
                             <tbody>
+                                @if(Auth::user()->role == 'manager')
+                                    @php
+                                        $salaryPayments = $salaryPayments->where('status', 'pending');
+                                    @endphp
+                                @endif
                                 @foreach ($salaryPayments as $data)
                                     <tr>
                                         <td>{{ $data->employee->name }}</td>

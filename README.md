@@ -1,66 +1,108 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Salary Payment
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem ini dibangun dengan Laravel untuk mengelola proses pembayaran gaji karyawan di sebuah perusahaan dengan alur persetujuan multi-level. Sistem ini mencakup:
+    - Manajemen pengguna dengan 3 peran berbeda
+    - Proses pengajuan pembayaran gaji + bonus
+    - Perhitungan otomatis PPH21 berdasarkan aturan pajak
+    - Alur persetujuan oleh manajer
+    - Pemrosesan pembayaran oleh divisi keuangan
+    - Pelaporan untuk direktur
+    - Sistem notifikasi real-time
 
-## About Laravel
+## Spesifikasi Aplikasi
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   PHP 8.2
+-   Laravel 11.31
+-   MySQL Database
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Fitur Aplikasi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Manajemen Pengguna
+    - Finance: Membuat pengajuan pembayaran gaji
+    - Manager: Menyetujui/menolak pengajuan
+    - Director: Melihat laporan pembayaran
 
-## Learning Laravel
+2. Proses Pembayaran Gaji
+    - Input gaji pokok dan bonus
+    - Perhitungan otomatis PPH21:
+        * ≤ 5 juta → 5%
+        * 5-20 juta → 10%
+        * 20 juta → 15%
+    - Total gaji bersih otomatis terhitung
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. Alur Persetujuan
+    - Finance mengajukan pembayaran (status: pending)
+    - Manager menyetujui (approved) atau menolak (rejected)
+    - Jika disetujui, finance memproses pembayaran (paid)
+    - Director bisa melihat semua riwayat pembayaran
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+4. Sistem Notifikasi
+    - Notifikasi real-time saat:
+    - Pengajuan baru dibuat
+    - Pengajuan disetujui/ditolak
+    - Pembayaran selesai diproses
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Role Aplikasi
 
-## Laravel Sponsors
+1. Finance
+2. Manager
+3. Director
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+#### Finance
 
-### Premium Partners
+-   Name        : Finance
+-   Email       : finance@gmail.com
+-   Password    : 1234
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+#### Manager
 
-## Contributing
+-   Name        : Manager
+-   Email       : manager@gmail.com
+-   Password    : 1234
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### Director
 
-## Code of Conduct
+-   Name        : Director
+-   Email       : director@gmail.com
+-   Password    : 1234
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Note: Semua akun passwordnya sama yaitu "1234"
 
-## Security Vulnerabilities
+## Cara Menggunakan
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Finance
 
-## License
+- Masuk ke aplikasi menggunakan akun finance
+- Buat pengajuan pembayaran gaji pada menu payment dan membuka drop down (Salary Calculation) dengan mengisi form yang tersedia:
+    * Pilih karyawan
+    * Tambahkan bonus (jika ada)
+    * Sistem akan otomatis menghitung PPH21 dan total gaji bersih
+- Simpan pengajuan pembayaran
+- Ajukan ke manager
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 2. Manager
+
+- Login menggunakan akun Manager
+- Akses halaman Payment Approval untuk melihat daftar pengajuan pembayaran gaji
+- Review detail pengajuan yang berisi:
+    * Informasi karyawan
+    * Rincian gaji, bonus, dan pajak
+    * Total yang akan dibayarkan
+- Approve atau reject pengajuan dengan memberikan alasan jika ditolak
+
+### 3. Director
+
+- Login menggunakan akun Director
+- Akses halaman Payment Report untuk melihat:
+    * Ringkasan seluruh pembayaran gaji
+    * Status pengajuan
+
+## Instalasi
+
+1. Clone repositori ini ke direktori lokal Anda.
+2. Salin file `.env.example` menjadi `.env` dan atur konfigurasi database.
+3. Jalankan perintah `composer install` untuk menginstal dependensi.
+4. Jalankan perintah `php artisan key:generate` untuk menghasilkan kunci aplikasi.
+5. Jalankan migrasi database dengan perintah `php artisan migrate`.
+6. Jalankan perintah `php artisan db:seed` untuk memasukkan akun kedalam aplikasi.
+7. Jalankan server dengan perintah `php artisan serve`.
